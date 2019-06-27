@@ -3,13 +3,13 @@ class App extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this)
         this.markDone = this.markDone.bind(this)
+        this.markNotDone = this.markNotDone.bind(this)
         this.state = {
             taskList: [],
             completedTasks: []
         };
     }
 
-    //on submit new task is added to previously entered tasks
     handleSubmit(e) {
         e.preventDefault();
         var taskList_Array = this.state.taskList
@@ -18,15 +18,33 @@ class App extends React.Component {
             taskList: taskList_Array,
         })
         this.nextTask.value = ""
-        console.log("taskList_array: " + this.state.taskList)
     }
 
-    markDone(clickedIndex) {
-        completedTasks_array = taskList.splice(clickedIndex, 1);
+    markDone(task) {
+        console.log(task)
+        debugger
+        var index = this.state.taskList.indexOf(task)
+        var moveDone = this.state.taskList.splice(index, 1)
+        debugger
+        console.log(moveDone)
+        var completedTasks_array = this.state.completedTasks
+        completedTasks_array.push(moveDone)
         this.setState({
             completedTasks: completedTasks_array
         })
-        console.log("completedTasks_array:" + completedTasks_array)
+        console.log("completedTasks_array:" + this.state.completedTasks_array)
+    }
+
+    markNotDone(task_addBack) {
+
+        var index = this.state.completedTasks.indexOf(task_addBack)
+        var moveUndone = this.state.completedTasks.splice(index, 1)
+        var taskList_updated = this.state.taskList
+        taskList_updated.push(moveUndone)
+        this.setState({
+            taskList: taskList_updated
+        })
+        console.log("added this back to done:" + this.state.taskList_updated)
     }
 
     render() {
@@ -39,7 +57,7 @@ class App extends React.Component {
                 <div><h2>TO DO:</h2></div>
                 <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} />
                 <div><h2>DONE:</h2></div>
-                <DoneList completedTasks={this.state.completedTasks} />
+                <DoneList completedTasks={this.state.completedTasks} handleUnmarked={this.markNotDone} />
 
             </div>
         )
@@ -51,20 +69,20 @@ class App extends React.Component {
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
-        // this.handleClick.bind(this)
+        this.marked = this.marked.bind(this)
     }
 
+    marked(e){
+        this.props.handleMarked(e.target.id)
+    }
 
-    // handleClick(e) {
-    //     this.handleMarked(e.target)
-    // }
 
     render() {
         return (
             <div>
                 <ul>
                     {this.props.taskList.map((x, i) =>
-                        <li className="list" id="i" key={x} onClick={this.props.handleMarked}>{x}</li>
+                        <li className="list" id={i} key={x} onClick={this.marked}>{x}</li>
                     )}
                 </ul>
             </div>
@@ -81,9 +99,8 @@ class DoneList extends React.Component {
         return (
             <div>
                 <ul>
-                    {this.props.completedTasks.map((x) =>
-                        <li key={x} >{x}</li>
-                        // onClick={this.markDone.bind(this, i)} - was gonna put this in the line above
+                    {this.props.completedTasks.map((y, i) =>
+                        <li className="list" id={i} key={y} onClick={this.props.handleUnmarked}>{y}</li>
                     )}
                 </ul>
 
