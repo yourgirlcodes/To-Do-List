@@ -20,36 +20,54 @@ class App extends React.Component {
         this.nextTask.value = ""
     }
 
-    markDone(task) {
-        console.log(task)
-        debugger
-        var index = this.state.taskList.indexOf(task)
-        var moveDone = this.state.taskList.splice(index, 1)
-        debugger
-        console.log(moveDone)
-        var completedTasks_array = this.state.completedTasks
-        completedTasks_array.push(moveDone)
+
+    markDone(item_done) {
+
+        // var index = this.state.taskList.indexOf(item_done)
+        // var newCompletedTaskList = this.state.completedTasks
+        // newCompletedTaskList.push(this.state.taskList.splice(index, 1));
+
+
+        for (var i = 0; i < this.state.taskList.length; i++) {
+            if (this.state.taskList[i] === item_done) {
+                var newCompletedTaskList = this.state.completedTasks
+                newCompletedTaskList.push(this.state.taskList.splice(i, 1));
+                i--;
+            }
+        }
+
         this.setState({
-            completedTasks: completedTasks_array
+            completedTasks: newCompletedTaskList
         })
-        console.log("completedTasks_array:" + this.state.completedTasks_array)
+
     }
 
-    markNotDone(task_addBack) {
 
-        var index = this.state.completedTasks.indexOf(task_addBack)
-        var moveUndone = this.state.completedTasks.splice(index, 1)
-        var taskList_updated = this.state.taskList
-        taskList_updated.push(moveUndone)
+    markNotDone(item_notDone) {
+        var index = this.state.completedTasks.findIndex(i => i == item_notDone)
+
+        var newtaskList = this.state.taskList
+
+        newtaskList.push(this.state.completedTasks.splice(index, 1));    
+
+        // var index = this.state.completedTasks[item_notDone]
+
+        // for (var i = 0; i < this.state.completedTasks.length; i++) {
+        //     if (this.state.completedTasks[i] === item_notDone) {
+        //         // var newtaskList = this.state.taskList
+        //         newtaskList.push(this.state.completedTasks.splice(i, 1));
+        //         i--;
+        //     }
+        // }
+
         this.setState({
-            taskList: taskList_updated
+            taskList: newtaskList
         })
-        console.log("added this back to done:" + this.state.taskList_updated)
     }
 
     render() {
         return (
-            <div>
+            <div class="application">
                 <form onSubmit={this.handleSubmit} >
                     <input ref={x => this.nextTask = x} placeholder="THINGS TO DO" />
                     <input type="submit" value="+" />
@@ -66,23 +84,28 @@ class App extends React.Component {
 }
 
 
+
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
-        this.marked = this.marked.bind(this)
+        this.moveToDone = this.moveToDone.bind(this)
     }
 
-    marked(e){
-        this.props.handleMarked(e.target.id)
+    moveToDone(e) {
+        var item_done = e.target.id
+        this.props.handleMarked(item_done)
     }
+
+
 
 
     render() {
+        debugger;
         return (
             <div>
                 <ul>
-                    {this.props.taskList.map((x, i) =>
-                        <li className="list" id={i} key={x} onClick={this.marked}>{x}</li>
+                    {this.props.taskList.map((x) =>
+                        <li className="list" id={x} key={x} onClick={this.moveToDone}>{x}</li>
                     )}
                 </ul>
             </div>
@@ -90,17 +113,26 @@ class ToDoList extends React.Component {
     }
 }
 
+
 class DoneList extends React.Component {
     constructor(props) {
         super(props);
+        this.putBack_ToDo = this.putBack_ToDo.bind(this)
+    }
+
+    putBack_ToDo(e) {
+        debugger
+
+        var item_notDone = e.target.id
+        this.props.handleUnmarked(item_notDone)
     }
 
     render() {
         return (
             <div>
                 <ul>
-                    {this.props.completedTasks.map((y, i) =>
-                        <li className="list" id={i} key={y} onClick={this.props.handleUnmarked}>{y}</li>
+                    {this.props.completedTasks.map((x) =>
+                        <li className="list" id={x} key={x} onClick={this.putBack_ToDo}>{x}</li>
                     )}
                 </ul>
 
