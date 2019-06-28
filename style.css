@@ -11,25 +11,28 @@ ul {
 
 li.list {
     background-color: rgba(225, 225, 225, 0.6);
-    margin: 1rem;
+    margin: 0.5vw;
     margin-left: 0;
-    padding: 2rem;
-    width: 60vw;
-    font-size: 1rem;
+    padding: 2vw;
+    width: 43vw;
+    font-size: 1vw;
+    word-wrap: break-word;
+    text-align: left;
+
 }
 
 
-h3{
+h3 {
     font-size: 1.5rem;
     background-color: rgba(225, 225, 225, 0.6);
     margin: 1rem;
     margin-left: 0;
-    padding: 2rem;
-    width: 60vw;
+    padding: 1vw;
+    width: 45vw;
     font-weight: 800;
 }
 
-.application{
+.application {
     justify-items: center;
     justify-content: center;
     vertical-align: middle;
@@ -40,41 +43,60 @@ h3{
     font-size: 2rem;
 }
 
-.completed{
-    border: 2px solid red;
+.completed {
+    text-decoration: line-through;
+    text-align: left;
 }
 
-.done{
+.done {
     border: 2px solid black;
 }
 
-.trash{
-    height: 3vw;
-    width: 3vw;
-    display: inline-block;
-    text-align: right;
+.trash {
+    height: 2vw;
+    width: 2vw;
     background-image: url("img/trash.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     background-color: transparent;
     border: none;
+    float: right;
 }
 
-#form{
+#form {
     display: flex;
-    justify-content: space-evenly;
-    vertical-align: middle;
     padding: 1rem;
     margin-block-end: 0;
-  
 }
 
-input{
+textarea {
     font-size: 1rem;
     font-family: 'Merriweather', serif;
-    line-height: 2rem;
     text-align: center;
-    -ms-text-overflow: inherit;
+    white-space: pre-line;
+    width: 35vw;
+    resize: none;
 }
 
+button[type=submit] {
+    font-size: 4vw;
+    font-family: 'Merriweather', serif;
+    height: 5vw;
+    width: 5vw;
+    line-height: 4vw;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    border: none;
+    padding-left: 5vw;
+}
+
+#image {
+    padding-left: 2vw;
+    padding-top: 4vw;
+}
+
+#image:hover{
+    
+}
