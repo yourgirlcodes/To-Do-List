@@ -5,18 +5,26 @@ class App extends React.Component {
         this.markDone = this.markDone.bind(this)
         this.markNotDone = this.markNotDone.bind(this)
         this.delete = this.delete.bind(this)
+        this.focus = this.focus.bind(this)
         this.state = {
             taskList: [],
-            completedTasks: []
+            completedTasks: [],
+            isEmpty: " "
         };
+    }
+
+    focus() {
+        this.setState({ isEmpty: false })
     }
 
     handleSubmit(e) {
         e.preventDefault();
+
         var taskList_Array = this.state.taskList
         taskList_Array.push(this.nextTask.value);
         this.setState({
-            taskList: this.state.taskList
+            taskList: this.state.taskList,
+            isEmpty: " "
         })
         this.nextTask.value = ""
     }
@@ -30,27 +38,27 @@ class App extends React.Component {
 
         var index = this.state.taskList.findIndex(i => i == item_done)
         var newCompletedTaskList = this.state.completedTasks
-        if(index >= 0){
-        newCompletedTaskList.push(this.state.taskList.splice(index, 1));
-        this.setState({
-            taskList: this.state.taskList,
-            completedTasks: this.state.completedTasks
-        })
+        if (index >= 0) {
+            newCompletedTaskList.push(this.state.taskList.splice(index, 1));
+            this.setState({
+                taskList: this.state.taskList,
+                completedTasks: this.state.completedTasks,
+            })
+        }
     }
-}
 
-        // for (var i = 0; i < this.state.taskList.length; i++) {
-        //     if (this.state.taskList[i] === item_done && i == item_done_val) {
-        //         var newCompletedTaskList = this.state.completedTasks
-        //         newCompletedTaskList.push(this.state.taskList.splice(i, 1));
-        //         i--;
-        //     }
-        // }
+    // for (var i = 0; i < this.state.taskList.length; i++) {
+    //     if (this.state.taskList[i] === item_done && i == item_done_val) {
+    //         var newCompletedTaskList = this.state.completedTasks
+    //         newCompletedTaskList.push(this.state.taskList.splice(i, 1));
+    //         i--;
+    //     }
+    // }
 
-        // this.setState({
-        //     taskList: this.state.taskList,
-        //     completedTasks: this.state.completedTasks
-        // })
+    // this.setState({
+    //     taskList: this.state.taskList,
+    //     completedTasks: this.state.completedTasks
+    // })
 
 
 
@@ -58,14 +66,14 @@ class App extends React.Component {
 
         var index = this.state.completedTasks.findIndex(i => i == item_notDone)
         var newtaskList = this.state.taskList
-        if(index >= 0){
-        newtaskList.push(this.state.completedTasks.splice(index, 1));
-        this.setState({
-            taskList: this.state.taskList,
-            completedTasks: this.state.completedTasks
-        })
+        if (index >= 0) {
+            newtaskList.push(this.state.completedTasks.splice(index, 1));
+            this.setState({
+                taskList: this.state.taskList,
+                completedTasks: this.state.completedTasks
+            })
+        }
     }
-}
 
     delete(id, list) {
         if (list === "done") {
@@ -102,13 +110,14 @@ class App extends React.Component {
         return (
             <div class="application">
                 <div>
-                    <form onSubmit={this.handleSubmit} >
-                        <input ref={x => this.nextTask = x} placeholder="THINGS TO DO" />
-                        <input type="submit" value="+" />
+                    <Header appName="Sh*t To Get Done" logo="crown" />
+                    <form id="form" onSubmit={this.handleSubmit} >
+                        <input ref={x => this.nextTask = x} placeholder="Add More Sh*t Here" onFocus={this.focus} />
+                        <input type="submit" value="+" disabled={this.state.isEmpty} />
                     </form>
-                    <div><h2>TO DO:</h2></div>
+                    <div><h3>TO DO:</h3></div>
                     <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} remove={this.delete} />
-                    <div><h2>DONE:</h2></div>
+                    <div><h3>DONE:</h3></div>
                     <DoneList completedTasks={this.state.completedTasks} handleUnmarked={this.markNotDone} remove={this.delete} />
                 </div>
             </div>
@@ -117,6 +126,20 @@ class App extends React.Component {
 
 }
 
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>
+                <span>{this.props.appName}
+                    <img src={`./img/${this.props.logo}.png`} />
+                </span>
+            </div>
+        );
+    }
+}
 
 
 class ToDoList extends React.Component {
