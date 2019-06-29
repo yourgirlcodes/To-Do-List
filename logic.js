@@ -6,6 +6,7 @@ class App extends React.Component {
         this.markNotDone = this.markNotDone.bind(this)
         this.delete = this.delete.bind(this)
         this.focus = this.focus.bind(this)
+        this.prioritize = this.prioritize.bind(this)
         this.state = {
             taskList: [],
             completedTasks: [],
@@ -57,35 +58,42 @@ class App extends React.Component {
 
     delete(id, list) {
         if (list === "done") {
-            var x = this.state.completedTasks.findIndex(i => i == id)
-            this.state.completedTasks.splice(x, 1);
+            var index = this.state.completedTasks.findIndex(i => i == id)
+            this.state.completedTasks.splice(index, 1);
             this.setState({
                 completedTasks: this.state.completedTasks,
-                taskList: this.state.taskList,
             })
 
         } else if (list === "toDo") {
-            var x = this.state.taskList.findIndex(i => i == id)
-            this.state.taskList.splice(x, 1);
+            var index = this.state.taskList.findIndex(i => i == id)
+            this.state.taskList.splice(index, 1);
             this.setState({
-                taskList: this.state.taskList,
                 taskList: this.state.taskList,
             })
         }
     }
 
+    prioritize(priorityTask){
+        var index = this.state.taskList.findIndex(i => i == priorityTask)
+        var updatedTaskList = this.state.taskList
+        updatedTaskList.unshift(this.state.taskList.splice(index, 1));
+        this.setState({
+            taskList: this.state.taskList
+        })
+}
+
     render() {
         return (
-            <div class="application">
+            <div className="application">
                 <div>
                     <Header appName="Sh*t To Get Done" logo="crown" />
                     <form id="form" onSubmit={this.handleSubmit} > 
                         <textarea ref={x => this.nextTask = x} placeholder="add new sh*t" onChange={this.focus} />
-                        <button class="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>+</button>
+                        <button className="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>+</button>
                     </form>
-                    <h3 class="color" id="do">TO DO:</h3>
-                    <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} remove={this.delete} />
-                    <h3 class="color" id="done">DONE:</h3>
+                    <h3 className="color" id="do">TO DO:</h3>
+                    <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} remove={this.delete} favourite={this.prioritize}/>
+                    <h3 className="color" id="done">DONE:</h3>
                     <DoneList completedTasks={this.state.completedTasks} handleUnmarked={this.markNotDone} remove={this.delete} />
                 </div>
             </div>
@@ -101,7 +109,7 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <span class="color" id="header">{this.props.appName}
+                <span className="color" id="header">{this.props.appName}
                     <img src={`./img/${this.props.logo}.png`} id="image"/>
                 </span>
             </div>
@@ -115,6 +123,8 @@ class ToDoList extends React.Component {
         super(props);
         this.moveToDone = this.moveToDone.bind(this)
         this.toRemove = this.toRemove.bind(this)
+        this.toFavourite = this.toFavourite.bind(this)
+
     }
 
     moveToDone(e) {
@@ -129,13 +139,19 @@ class ToDoList extends React.Component {
         this.props.remove(id, list)
     }
 
+    toFavourite(e){
+        var priorityTask = e.target.id
+        this.props.favourite(priorityTask)
+    }
+
+
     render() {
         
         return (
             <div>
                 <ul>
                     {this.props.taskList.map((x, i) =>
-                        <li className="toDo list color" key={x} id={x} value={i} onDoubleClick={this.moveToDone}>{x}<button id={x} class="trash" value="toDo" onClick={this.toRemove} /></li>
+                        <li className="toDo list color" key={x} id={x} value={i} onDoubleClick={this.moveToDone}>{x}<button id={x} className="trash" value="toDo" onClick={this.toRemove} /><button id={x} className="star" value="favourite" onClick={this.toFavourite}/></li>
                     )}
                 </ul>
             </div>
@@ -167,7 +183,7 @@ class DoneList extends React.Component {
             <div>
                 <ul>
                     {this.props.completedTasks.map((x, i) =>
-                        <li className="completed list color" id={x} key={x} value={i} onDoubleClick={this.putBack_ToDo}>{x}<button id={x} class="trash" value="done" onClick={this.toRemove} /></li>
+                        <li className="completed list color" id={x} key={x} value={i} onDoubleClick={this.putBack_ToDo}>{x}<button id={x} className="trash" value="done" onClick={this.toRemove} /></li>
                     )}
                 </ul>
 

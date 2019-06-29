@@ -4,7 +4,7 @@ body{
 
 #header{
     font-size: 2.5vw;
-    color: aquamarine;
+    color: white;
 }
 
 ul {
@@ -52,7 +52,7 @@ h3 {
     font-size: 2rem;
     width: 55vw;
     height: 100vw;
-    border: 0.5vw solid aquamarine;
+    border: 0.5vw solid rgba(225, 225, 225, 0.5);
     position: absolute;
     margin-top: 2vw;
     background-color: rgba(225, 225, 225, 0.1)
@@ -68,6 +68,10 @@ h3 {
     border: 0.2vw solid #e028a0;
     background-color: transparent;
     color: #e028a0;
+}
+
+.favourite {
+    border: 2px solid yellow;
 }
 
 #do{
@@ -107,6 +111,20 @@ h3 {
     background-color: transparent;
     border: none;
     float: right;
+    outline: 0;
+}
+
+.star {
+    height: 1.5vw;
+    width: 1.5vw;
+    background-image: url("img/star.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    float: right;
+    outline: 0;
 }
 
 
@@ -128,6 +146,7 @@ textarea {
     border: 2px solid white;
     color: white;
     vertical-align: middle;
+    outline: 0;
 }
 
 button[type=submit] {
@@ -145,7 +164,6 @@ button[type=submit] {
 
 button[type=submit]:hover{
     color: white;
-
 }
 
 #image {
