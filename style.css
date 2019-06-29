@@ -1,60 +1,93 @@
+body{
+    background-color: black;
+}
+
+#header{
+    font-size: 2.5vw;
+    color: white;
+}
+
 ul {
     list-style-type: none;
     margin-left: 0;
-    margin-block-start: 1em;
     margin-block-end: 0;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 0;
+    padding-top: 1vw;
+    margin: 0
 }
 
 
 li.list {
-    background-color: rgba(225, 225, 225, 0.6);
     margin: 0.5vw;
     margin-left: 0;
-    padding: 2vw;
+    padding: 1vw;
     width: 43vw;
     font-size: 1vw;
     word-wrap: break-word;
     text-align: left;
-
 }
 
 
 h3 {
-    font-size: 1.5rem;
-    background-color: rgba(225, 225, 225, 0.6);
-    margin: 1rem;
+    font-size: 1.5vw;
+    margin: 1vw;
     margin-left: 0;
-    padding: 1vw;
-    width: 45vw;
-    font-weight: 800;
+    padding: 0.5vw;
+    width: 44vw;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
 
 .application {
-    justify-items: center;
+    /* justify-items: center; */
     justify-content: center;
     vertical-align: middle;
-    text-align: center;
-    left: 50%;
+    left: 20%;
     display: flex;
     font-family: 'Merriweather', serif;
     font-size: 2rem;
+    width: 55vw;
+    height: 100vw;
+    border: 2px solid black;
+    position: absolute;
+    margin-top: 2vw;
+    background-color: rgba(225, 225, 225, 0.1)
 }
 
 .completed {
     text-decoration: line-through;
-    text-align: left;
+    border: 0.2vw solid #41d63e;
+    color: #41d63e
 }
 
-.done {
-    border: 2px solid black;
+.toDo{
+    border: 0.2vw solid #e028a0;
+    background-color: transparent;
+    color: #e028a0;
+}
+
+#do{
+    background-color: rgba(224, 40, 160, 0.7);
+    color: black;
+    font-weight: bolder;
+    border: 0.3vw solid #e028a0;
+
+}
+
+#done{
+    background-color: rgba(65, 214, 62, 0.7);
+    border: 0.3vw solid #41d63e;
+    color: black;
+    
 }
 
 .trash {
-    height: 2vw;
-    width: 2vw;
+    height: 1.5vw;
+    width: 1.5vw;
     background-image: url("img/trash.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -68,33 +101,40 @@ h3 {
     display: flex;
     padding: 1rem;
     margin-block-end: 0;
+    padding-left: 0;
 }
 
 textarea {
-    font-size: 1rem;
+    font-size: 1vw;
     font-family: 'Merriweather', serif;
-    text-align: center;
     white-space: pre-line;
     width: 35vw;
+    height: 4vw;
     resize: none;
+    background-color: rgba(225, 225, 225, 0.1);
+    border: 2px solid white;
+    color: white;
+    vertical-align: middle;
 }
 
 button[type=submit] {
     font-size: 4vw;
     font-family: 'Merriweather', serif;
-    height: 5vw;
-    width: 5vw;
-    line-height: 4vw;
+    height: 3vw;
+    width: 3vw;
+    line-height: 1vw;
     text-align: center;
     vertical-align: middle;
     background-color: transparent;
     border: none;
-    padding-left: 5vw;
+    padding-left: 2vw;
 }
 
 #image {
     padding-left: 2vw;
     padding-top: 4vw;
+    width: 8vw;
+    height: 5vw;
 }
 
 #image:hover{

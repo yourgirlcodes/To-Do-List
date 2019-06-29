@@ -1,3 +1,4 @@
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -83,9 +84,9 @@ class App extends React.Component {
                         <textarea ref={x => this.nextTask = x} placeholder="add new sh*t" onChange={this.focus} />
                         <button class="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>+</button>
                     </form>
-                    <div><h3>TO DO:</h3></div>
+                    <h3 id="do">TO DO:</h3>
                     <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} remove={this.delete} />
-                    <div><h3>DONE:</h3></div>
+                    <h3 id="done">DONE:</h3>
                     <DoneList completedTasks={this.state.completedTasks} handleUnmarked={this.markNotDone} remove={this.delete} />
                 </div>
             </div>
@@ -101,7 +102,7 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <span>{this.props.appName}
+                <span id="header">{this.props.appName}
                     <img src={`./img/${this.props.logo}.png`} id="image"/>
                 </span>
             </div>
@@ -129,9 +130,8 @@ class ToDoList extends React.Component {
         this.props.remove(id, list)
     }
 
-
-
     render() {
+        
         return (
             <div>
                 <ul>
