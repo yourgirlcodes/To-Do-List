@@ -18,6 +18,7 @@ class App extends React.Component {
         this.setState({ isEmpty: false })
     }
 
+    //User enters a task
     handleSubmit(e) {
         e.preventDefault();
 
@@ -30,8 +31,8 @@ class App extends React.Component {
         this.nextTask.value = ""
     }
 
+    //To-Do item is marked done
     markDone(item_done) {
-
         var index = this.state.taskList.findIndex(i => i == item_done)
         var newCompletedTaskList = this.state.completedTasks
         if (index >= 0) {
@@ -43,8 +44,8 @@ class App extends React.Component {
         }
     }
 
+    //Completed task moved back to To-Do list
     markNotDone(item_notDone) {
-
         var index = this.state.completedTasks.findIndex(i => i == item_notDone)
         var newtaskList = this.state.taskList
         if (index >= 0) {
@@ -56,6 +57,7 @@ class App extends React.Component {
         }
     }
 
+    //User wants to delete a task
     delete(id, list) {
         if (list === "done") {
             var index = this.state.completedTasks.findIndex(i => i == id)
@@ -73,6 +75,7 @@ class App extends React.Component {
         }
     }
 
+    //User wants to prioritize a task to the top of the To-Do list
     prioritize(priorityTask){
         var index = this.state.taskList.findIndex(i => i == priorityTask)
         var updatedTaskList = this.state.taskList
@@ -81,7 +84,6 @@ class App extends React.Component {
             taskList: this.state.taskList
         })
 }
-
     render() {
         return (
             <div className="application">

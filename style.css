@@ -114,9 +114,17 @@ h3 {
     outline: 0;
 }
 
+.star:hover{
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
 .star {
-    height: 1.5vw;
-    width: 1.5vw;
+    height: 2vw;
+    width: 2vw;
     background-image: url("img/star.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -125,6 +133,7 @@ h3 {
     border: none;
     float: right;
     outline: 0;
+    padding: 1vw;
 }
 
 
