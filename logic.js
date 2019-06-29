@@ -1,11 +1,3 @@
-var date_utils = {
-    months: ["January", "February", "March", "April", "May", "June", "July",
-        "August", "September", "October", "November", "December"],
-    days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-        18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-    years: [2018, 2019, 2020, 2021, 2022]
-};
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -27,15 +19,9 @@ class App extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        debugger
-        var new_Task = {
-            nextTask: this.nextTask.value,
-            day: this.day.value,
-            month: this.month.value,
-            year: this.year.value
-        };
+
         var taskList_Array = this.state.taskList
-        taskList_Array.push(new_Task);
+        taskList_Array.push(this.nextTask.value);
         this.setState({
             taskList: this.state.taskList,
             isEmpty: " "
@@ -88,26 +74,13 @@ class App extends React.Component {
         }
     }
 
-    renderOptions(arr) {
-        return arr.map(x => <option key={x} value={x}>{x}</option>);
-    }
-
     render() {
         return (
             <div class="application">
                 <div>
                     <Header appName="Sh*t To Get Done" logo="crown" />
-                    <form id="form" onSubmit={this.handleSubmit} >
+                    <form id="form" onSubmit={this.handleSubmit} > 
                         <textarea ref={x => this.nextTask = x} placeholder="add new sh*t" onChange={this.focus} />
-                        <select ref={x => this.day = x}>
-                            {this.renderOptions(date_utils.days)}
-                        </select>
-                        <select ref={x => this.month = x}>
-                            {this.renderOptions(date_utils.months)}
-                        </select>
-                        <select ref={x => this.year = x}>
-                            {this.renderOptions(date_utils.years)}
-                        </select>
                         <button class="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>+</button>
                     </form>
                     <h3 id="do">TO DO:</h3>
@@ -129,7 +102,7 @@ class Header extends React.Component {
         return (
             <div>
                 <span id="header">{this.props.appName}
-                    <img src={`./img/${this.props.logo}.png`} id="image" />
+                    <img src={`./img/${this.props.logo}.png`} id="image"/>
                 </span>
             </div>
         );
@@ -157,7 +130,7 @@ class ToDoList extends React.Component {
     }
 
     render() {
-
+        
         return (
             <div>
                 <ul>
