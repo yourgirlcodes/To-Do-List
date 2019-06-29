@@ -52,7 +52,7 @@ h3 {
     font-size: 2rem;
     width: 55vw;
     height: 100vw;
-    border: 0.5vw solid rgba(225, 225, 225, 0.5);
+    border: 0.5vw solid aquamarine;
     position: absolute;
     margin-top: 2vw;
     background-color: rgba(225, 225, 225, 0.1)
@@ -83,18 +83,18 @@ h3 {
     color: black;
     
 }
-.color{
+.color:hover{
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
-    -webkit-transition: all 0.5s ease;
+    -webkit-transition: all 1.5s ease;
     }
     
-    .color:hover{
+    .color{
     filter: grayscale(0%);
     filter: gray;
     -webkit-filter: grayscale(0%);
     filter: none;
-    transition: 1s ease;
+    transition: 2s ease;
     }
 
 .trash {
