@@ -83,9 +83,9 @@ class App extends React.Component {
                         <textarea ref={x => this.nextTask = x} placeholder="add new sh*t" onChange={this.focus} />
                         <button class="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>+</button>
                     </form>
-                    <h3 id="do">TO DO:</h3>
+                    <h3 class="color" id="do">TO DO:</h3>
                     <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} remove={this.delete} />
-                    <h3 id="done">DONE:</h3>
+                    <h3 class="color" id="done">DONE:</h3>
                     <DoneList completedTasks={this.state.completedTasks} handleUnmarked={this.markNotDone} remove={this.delete} />
                 </div>
             </div>
@@ -101,7 +101,7 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <span id="header">{this.props.appName}
+                <span class="color" id="header">{this.props.appName}
                     <img src={`./img/${this.props.logo}.png`} id="image"/>
                 </span>
             </div>
@@ -135,7 +135,7 @@ class ToDoList extends React.Component {
             <div>
                 <ul>
                     {this.props.taskList.map((x, i) =>
-                        <li className="toDo list" key={x} id={x} value={i} onDoubleClick={this.moveToDone}>{x}<button id={x} class="trash" value="toDo" onClick={this.toRemove} /></li>
+                        <li className="toDo list color" key={x} id={x} value={i} onDoubleClick={this.moveToDone}>{x}<button id={x} class="trash" value="toDo" onClick={this.toRemove} /></li>
                     )}
                 </ul>
             </div>
@@ -167,7 +167,7 @@ class DoneList extends React.Component {
             <div>
                 <ul>
                     {this.props.completedTasks.map((x, i) =>
-                        <li className="completed list" id={x} key={x} value={i} onDoubleClick={this.putBack_ToDo}>{x}<button id={x} class="trash" value="done" onClick={this.toRemove} /></li>
+                        <li className="completed list color" id={x} key={x} value={i} onDoubleClick={this.putBack_ToDo}>{x}<button id={x} class="trash" value="done" onClick={this.toRemove} /></li>
                     )}
                 </ul>
 

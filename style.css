@@ -4,7 +4,7 @@ body{
 
 #header{
     font-size: 2.5vw;
-    color: white;
+    color: aquamarine;
 }
 
 ul {
@@ -52,7 +52,7 @@ h3 {
     font-size: 2rem;
     width: 55vw;
     height: 100vw;
-    border: 2px solid black;
+    border: 0.5vw solid rgba(225, 225, 225, 0.5);
     position: absolute;
     margin-top: 2vw;
     background-color: rgba(225, 225, 225, 0.1)
@@ -75,7 +75,6 @@ h3 {
     color: black;
     font-weight: bolder;
     border: 0.3vw solid #e028a0;
-
 }
 
 #done{
@@ -84,6 +83,19 @@ h3 {
     color: black;
     
 }
+.color{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -webkit-transition: all 0.5s ease;
+    }
+    
+    .color:hover{
+    filter: grayscale(0%);
+    filter: gray;
+    -webkit-filter: grayscale(0%);
+    filter: none;
+    transition: 1s ease;
+    }
 
 .trash {
     height: 1.5vw;
@@ -96,6 +108,7 @@ h3 {
     border: none;
     float: right;
 }
+
 
 #form {
     display: flex;
@@ -130,6 +143,11 @@ button[type=submit] {
     padding-left: 2vw;
 }
 
+button[type=submit]:hover{
+    color: white;
+
+}
+
 #image {
     padding-left: 2vw;
     padding-top: 4vw;
@@ -138,5 +156,22 @@ button[type=submit] {
 }
 
 #image:hover{
-    
+        animation: bounce 1s;
+}
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
 }
