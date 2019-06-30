@@ -91,12 +91,12 @@ class App extends React.Component {
                     <Header appName="Sh*t To Get Done" logo="crown" />
                     <form id="form" onSubmit={this.handleSubmit} > 
                         <textarea ref={x => this.nextTask = x} placeholder="add new sh*t" onChange={this.focus} />
-                        <button className="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>+</button>
+                        <button className="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>ADD</button>
                     </form>
                     <h3 className="color" id="do">TO DO:</h3>
-                    <ToDoList taskList={this.state.taskList} handleMarked={this.markDone} remove={this.delete} favourite={this.prioritize}/>
+                    <ToDoList name="toDo list color" value="toDo" task={this.state.taskList} handleMarked={this.markDone} remove={this.delete} favourite={this.prioritize}/>
                     <h3 className="color" id="done">DONE:</h3>
-                    <DoneList completedTasks={this.state.completedTasks} handleUnmarked={this.markNotDone} remove={this.delete} />
+                    <ToDoList name="completed list color" value="done" task={this.state.completedTasks} handleMarked={this.markNotDone} remove={this.delete} />
                 </div>
             </div>
         )
@@ -123,16 +123,16 @@ class Header extends React.Component {
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
-        this.moveToDone = this.moveToDone.bind(this)
+        this.move = this.move.bind(this)
         this.toRemove = this.toRemove.bind(this)
         this.toFavourite = this.toFavourite.bind(this)
 
     }
 
-    moveToDone(e) {
-        var item_done = e.target.id
-        var item_done_val = e.target.value
-        this.props.handleMarked(item_done, item_done_val)
+    move(e) {
+        var item = e.target.id
+        var item_val = e.target.value
+        this.props.handleMarked(item, item_val)
     }
 
     toRemove(e) {
@@ -152,43 +152,10 @@ class ToDoList extends React.Component {
         return (
             <div>
                 <ul>
-                    {this.props.taskList.map((x, i) =>
-                        <li className="toDo list color" key={x} id={x} value={i} onDoubleClick={this.moveToDone}>{x}<button id={x} className="trash" value="toDo" onClick={this.toRemove} /><button id={x} className="star" value="favourite" onClick={this.toFavourite}/></li>
+                    {this.props.task.map((x, i) =>
+                        <li className={this.props.name} key={x} id={x} value={i} onDoubleClick={this.move}>{x}<button id={x} className="trash" value={this.props.value} onClick={this.toRemove} /><button id={x} className="star" value="favourite" onClick={this.toFavourite}/></li>
                     )}
                 </ul>
-            </div>
-        )
-    }
-}
-
-
-class DoneList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.putBack_ToDo = this.putBack_ToDo.bind(this)
-        this.toRemove = this.toRemove.bind(this)
-    }
-
-    putBack_ToDo(e) {
-        var item_notDone = e.target.id
-        this.props.handleUnmarked(item_notDone)
-    }
-
-    toRemove(e) {
-        var id = e.target.id
-        var list = e.target.value
-        this.props.remove(id, list)
-    }
-
-    render() {
-        return (
-            <div>
-                <ul>
-                    {this.props.completedTasks.map((x, i) =>
-                        <li className="completed list color" id={x} key={x} value={i} onDoubleClick={this.putBack_ToDo}>{x}<button id={x} className="trash" value="done" onClick={this.toRemove} /></li>
-                    )}
-                </ul>
-
             </div>
         )
     }
