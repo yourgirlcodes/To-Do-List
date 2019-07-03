@@ -104,7 +104,7 @@ h3 {
 .trash {
     height: 1.5vw;
     width: 1.5vw;
-    background-image: url("img/trash.svg");
+    background-image: url("img/trash.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -125,7 +125,7 @@ h3 {
 .star {
     height: 2vw;
     width: 2vw;
-    background-image: url("img/star.svg");
+    background-image: url("img/favourite.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

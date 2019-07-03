@@ -14,11 +14,12 @@ class App extends React.Component {
         };
     }
 
+    //Focus adjustment for the textbox
     focus() {
         this.setState({ isEmpty: false })
     }
 
-    //User enters a task
+    //User enters a task, button is disabled unless user enters input. 
     handleSubmit(e) {
         e.preventDefault();
 
@@ -31,7 +32,7 @@ class App extends React.Component {
         this.nextTask.value = ""
     }
 
-    //To-Do item is marked done
+    //To-Do item is marked done and task is sent down to the 'completed' list
     markDone(item_done) {
         var index = this.state.taskList.findIndex(i => i == item_done)
         var newCompletedTaskList = this.state.completedTasks
@@ -44,7 +45,7 @@ class App extends React.Component {
         }
     }
 
-    //Completed task moved back to To-Do list
+    //Completed item is moved back up to To-Do list when user wants to re-classify the task
     markNotDone(item_notDone) {
         var index = this.state.completedTasks.findIndex(i => i == item_notDone)
         var newtaskList = this.state.taskList
@@ -57,7 +58,7 @@ class App extends React.Component {
         }
     }
 
-    //User wants to delete a task
+    //User finishes/cancels a planned task, task is deleted
     delete(id, list) {
         if (list === "done") {
             var index = this.state.completedTasks.findIndex(i => i == id)
@@ -75,7 +76,7 @@ class App extends React.Component {
         }
     }
 
-    //User wants to prioritize a task to the top of the To-Do list
+    //User favourites a task, task is sent to the top of the To-Do List
     prioritize(priorityTask){
         var index = this.state.taskList.findIndex(i => i == priorityTask)
         var updatedTaskList = this.state.taskList
@@ -129,18 +130,21 @@ class ToDoList extends React.Component {
 
     }
 
+    //item to be re-classified 
     move(e) {
         var item = e.target.id
         var item_val = e.target.value
         this.props.handleMarked(item, item_val)
     }
 
+    //item to be cancelled/removed
     toRemove(e) {
         var id = e.target.id
         var list = e.target.value
         this.props.remove(id, list)
     }
 
+    //item to be favourited
     toFavourite(e){
         var priorityTask = e.target.id
         this.props.favourite(priorityTask)
