@@ -60,14 +60,14 @@ h3 {
 
 .completed {
     text-decoration: line-through;
-    border: 0.2vw solid #41d63e;
-    color: #41d63e
+    border: 0.2vw solid lightsteelblue;
+    color: lightsteelblue
 }
 
 .toDo{
-    border: 0.2vw solid #e028a0;
+    border: 0.2vw solid lightpink;
     background-color: transparent;
-    color: #e028a0;
+    color: lightpink;
 }
 
 .favourite {
@@ -75,16 +75,16 @@ h3 {
 }
 
 #do{
-    background-color: rgba(224, 40, 160, 0.7);
-    color: black;
+    background-color: rgba(255,182,193, 0.7);
+    color: white;
     font-weight: bolder;
-    border: 0.3vw solid #e028a0;
+    border: 0.3vw solid lightpink;
 }
 
 #done{
-    background-color: rgba(65, 214, 62, 0.7);
-    border: 0.3vw solid #41d63e;
-    color: black;
+    background-color: rgba(175,196,222, 0.7);
+    border: 0.3vw solid lightsteelblue;
+    color: white;
     
 }
 .color:hover{
