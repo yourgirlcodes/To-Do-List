@@ -136,6 +136,9 @@ h3 {
     padding: 1vw;
 }
 
+.completed.list.color .star{
+    display: none
+}
 
 #form {
     display: flex;

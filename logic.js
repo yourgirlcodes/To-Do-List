@@ -95,9 +95,9 @@ class App extends React.Component {
                         <button className="btn-a" type="submit" value="+" disabled={this.state.isEmpty}>ADD</button>
                     </form>
                     <h3 className="color" id="do">TO DO:</h3>
-                    <ToDoList name="toDo list color" value="toDo" task={this.state.taskList} handleMarked={this.markDone} remove={this.delete} favourite={this.prioritize}/>
+                    <ToDoList name="toDo list color" value="toDo" task={this.state.taskList} handleMarked={this.markDone} remove={this.delete} favourite={this.prioritize} />
                     <h3 className="color" id="done">DONE:</h3>
-                    <ToDoList name="completed list color" value="done" task={this.state.completedTasks} handleMarked={this.markNotDone} remove={this.delete} />
+                    <ToDoList name="completed list color" value="done" task={this.state.completedTasks} handleMarked={this.markNotDone} remove={this.delete}/>
                 </div>
             </div>
         )
